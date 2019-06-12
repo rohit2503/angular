@@ -3,34 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Tutorial app</app></title>
-    <script src="lib/angualr.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-route.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/tutorialCtrl.js"></script>
 </head>
 <body>
 
-    <div ng-controller="TutorialCtrl">
+<div ng-view>
 
-        <p> {{2 + 2 }}</p>
-
-        <p>String: {{ tutorialObject.firstname + " "  + tutorialObject.lastname | uppercase}} </p>
-
-        <p> <b>Binding : {{ tutorialObject.bindOutput | currency: "Rs":"4" }}</b>  </p>
-
-
-        <button ng-click="twotimes()">Multiply</button>
-
-        <label>First Name:</label>
-        <input ng-model="tutorialObject.firstname">
-
-        <label>Last Name:</label>
-        <input ng-model="tutorialObject.lastname">
-
-    </div>
-
-<welcomemessage></welcomemessage>
-
-<span welcomemessage ></span>
+</div>
 
 </body>
 </html>

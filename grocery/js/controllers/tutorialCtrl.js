@@ -46,4 +46,12 @@ angular.module("tutorialCtrlModule", [])
 
     }
 
-});
+})
+
+
+.controller("TutorialRoute", ["$scope", function ($scope) {
+
+    $scope.routescopeObject = {};
+    $scope.routescopeObject.routetutorial = "Route Page";
+
+}]);

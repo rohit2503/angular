@@ -1,0 +1,21 @@
+    <p> {{2 + 2 }}</p>
+
+    <p>String: {{ tutorialObject.firstname + " "  + tutorialObject.lastname | uppercase}} </p>
+
+    <p> <b>Binding : {{ tutorialObject.bindOutput | currency: "Rs"}}</b>  </p>
+
+
+    <button ng-click="twotimes()">Multiply</button>
+
+    <label>First Name:</label>
+    <input ng-model="tutorialObject.firstname"/>
+
+    <label>Last Name:</label>
+    <input ng-model="tutorialObject.lastname"/>
+
+    <welcomemessage></welcomemessage>
+
+    <span welcomemessage ></span>
+
+    <a href='!#/tutorialroute'> Link to Route Page</a>
+
