@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="tutorialapp">
+<html ng-app="groceryListApp">
 <head>
     <meta charset="UTF-8">
     <title>Tutorial app</app></title>
@@ -9,26 +9,44 @@
     <script src="js/controllers/tutorialCtrl.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <link rel="stylesheet" href="css/bootstrap-grid.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
-<body>
 
+<body ng-controller="HomeController">
 
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">GroceryList</a>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-apple" style="color:#5BDB4E">
+
+                </span>
+                {{ apptitle }}
+            </a>
+        </div>
+
+    </div>
+
 </nav>
 
-<ul class="list-group">
-    <li class="list-group-item active">Shampoo</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Morbi leo risus</li>
-    <li class="list-group-item">Porta ac consectetur ac</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-</ul>
-
-
-<div >
-
+<div class="container" ng-controller="GroceryListItemsController">
+    <div class="col-xl-12">
+        <ul class="list-group">
+            <li ng-repeat="item in groceryItems" class="list-group-item text-center clearfix">
+                <span style="font-weight: bold">{{ item.itemName}}</span>
+            </li>
+        </ul>
+    </div>
 </div>
+
+<!--<ul class="list-group">-->
+<!--    <li class="list-group-item active">Shampoo</li>-->
+<!--    <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--    <li class="list-group-item">Morbi leo risus</li>-->
+<!--    <li class="list-group-item">Porta ac consectetur ac</li>-->
+<!--    <li class="list-group-item">Vestibulum at eros</li>-->
+<!--</ul>-->
+
 
 </body>
 
