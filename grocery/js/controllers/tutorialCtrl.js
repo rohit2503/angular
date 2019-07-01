@@ -8,7 +8,7 @@ angular.module("tutorialCtrlModule", [])
     $scope.tutorialObject.title = "Main Page";
     $scope.tutorialObject.subtitle = "Sub title";
 
-    $scope.tutorialObject.bindOutput = 2
+    $scope.tutorialObject.bindOutput = 2;
 
     $scope.tutorialObject.firstname = "Rohit";
     $scope.tutorialObject.lastname = "Jaiswal";
@@ -25,7 +25,7 @@ angular.module("tutorialCtrlModule", [])
 
 .factory("Calculations", function () {
 
-    var myvar = [];
+    var myvar = {};
 
     myvar.twotimes = function (a) {
 
