@@ -29,24 +29,9 @@
 
 </nav>
 
-<div class="container" ng-controller="GroceryListItemsController">
-    <div class="col-xl-12">
-        <ul class="list-group">
-            <li ng-repeat="item in groceryItems" class="list-group-item text-center clearfix">
-                <span style="font-weight: bold">{{ item.itemName}}</span>
-            </li>
-        </ul>
-    </div>
+
+<div class="container" ng-view>
 </div>
-
-<!--<ul class="list-group">-->
-<!--    <li class="list-group-item active">Shampoo</li>-->
-<!--    <li class="list-group-item">Dapibus ac facilisis in</li>-->
-<!--    <li class="list-group-item">Morbi leo risus</li>-->
-<!--    <li class="list-group-item">Porta ac consectetur ac</li>-->
-<!--    <li class="list-group-item">Vestibulum at eros</li>-->
-<!--</ul>-->
-
 
 </body>
 
