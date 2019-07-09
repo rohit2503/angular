@@ -15,13 +15,7 @@ app.config(function($routeProvider){
             templateUrl: "views/addItem.html",
             controller: "GroceryListItemsController"
         })
-        .when("/addItem/edit/:id", {
-            templateUrl: "views/addItem.html",
-            controller: "GroceryListItemsController"
-        })
-        .otherwise({
-            redirectTo:"/"
-        })
+
 });
 
 
