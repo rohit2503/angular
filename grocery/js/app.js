@@ -15,7 +15,7 @@ app.config(function($routeProvider){
             templateUrl: "views/addItem.html",
             controller: "GroceryListItemsController"
         })
-        .when("/addItem/edit/", {
+        .when("/addItem/:id", {
             templateUrl: "views/addItem.html",
             controller: "GroceryListItemsController"
         })
@@ -29,16 +29,16 @@ app.service("GroceryService", function () {
 
     groceryService.groceryItems = [
 
-        {completed:true, itemName:'milk', date:'2014-10-21'},
-        {completed:true, itemName:'cookies', date:'2017-10-01'},
-        {completed:true, itemName:'pulses', date:'2015-10-21'},
-        {completed:true, itemName:'wheat', date:'2018-10-23'},
-        {completed:true, itemName:'bread', date:'2015-02-18'},
-        {completed:true, itemName:'butter', date:'2013-03-06'},
-        {completed:true, itemName:'cheese', date:'2017-11-19'},
-        {completed:true, itemName:'chocobar', date:'2016-06-11'},
-        {completed:true, itemName:'shampoo', date:'2018-08-12'},
-        {completed:true, itemName:'rice', date:'2019-07-1'},
+        {id:1, completed:true, itemName:'milk', date:'2014-10-21'},
+        {id:2, completed:true, itemName:'cookies', date:'2017-10-01'},
+        {id:3, completed:true, itemName:'pulses', date:'2015-10-21'},
+        {id:4, completed:true, itemName:'wheat', date:'2018-10-23'},
+        {id:5, completed:true, itemName:'bread', date:'2015-02-18'},
+        {id:6, completed:true, itemName:'butter', date:'2013-03-06'},
+        {id:7, completed:true, itemName:'cheese', date:'2017-11-19'},
+        {id:8, completed:true, itemName:'chocobar', date:'2016-06-11'},
+        {id:9, completed:true, itemName:'shampoo', date:'2018-08-12'},
+        {id:10, completed:true, itemName:'rice', date:'2019-07-1'},
     ];
 
     groceryService.findById = function (id) {
@@ -57,7 +57,8 @@ app.service("GroceryService", function () {
             groceryService.newId++;
         }
         else {
-            groceryService.newId = groceryService.groceryItems.length + 1;
+            var maxId = _.max(groceryService.groceryItems, function(entry){ return entry.id })
+            groceryService.newId = maxId.id + 1;
 
         }
         return groceryService.newId;
@@ -65,8 +66,16 @@ app.service("GroceryService", function () {
 
     groceryService.save = function (entry) {
 
-        entry.id = groceryService.getNewId();
-        groceryService.groceryItems.push(entry);
+        var updateditem = groceryService.findById(entry.id);
+        if (updateditem){
+            updateditem.itemName = entry.itemName;
+            updateditem.completed = entry.completed;
+            updateditem.date = entry.date;
+        }
+        else{
+          entry.id = groceryService.getNewId();
+          groceryService.groceryItems.push(entry);
+        }
     };
 
     groceryService.remove = function (entry) {
@@ -90,10 +99,18 @@ app.controller("HomeController", ["$scope", "GroceryService", function ($scope, 
 app.controller("GroceryListItemsController", ["$scope", "$routeParams", "$location", "GroceryService",
     function ($scope, $routeParams, $location, GroceryService) {
 
-    $scope.groceryItems = {id:0, completed:true, itemName:"Cheese", date: Date()};
+    if($routeParams.id){
+        $scope.groceryItem = _.clone(GroceryService.findById(parseInt($routeParams.id)));
+     }
+     else{
+        $scope.groceryItem = {id:0, completed:true, itemName:"", date:Date()};
+
+
+     }
+
     
     $scope.save = function () {
-        GroceryService.save($scope.groceryItems);
+        GroceryService.save($scope.groceryItem);
         $location.path("/");
     };
 
