@@ -15,6 +15,10 @@ app.config(function($routeProvider){
             templateUrl: "views/addItem.html",
             controller: "GroceryListItemsController"
         })
+        .when("/addItem/edit/", {
+            templateUrl: "views/addItem.html",
+            controller: "GroceryListItemsController"
+        })
 
 });
 
@@ -53,10 +57,8 @@ app.service("GroceryService", function () {
             groceryService.newId++;
         }
         else {
-            var maxId = _.max(groceryService.groceryItems, function (entry){
-                return entry.id;
-            });
-            groceryService.newId = maxId.id + 1;
+            groceryService.newId = groceryService.groceryItems.length + 1;
+
         }
         return groceryService.newId;
     };
@@ -67,6 +69,11 @@ app.service("GroceryService", function () {
         groceryService.groceryItems.push(entry);
     };
 
+    groceryService.remove = function (entry) {
+
+        console.log(entry.itemName);
+    };
+
     return groceryService;
 });
 
@@ -74,19 +81,20 @@ app.controller("HomeController", ["$scope", "GroceryService", function ($scope, 
 
     $scope.apptitle = "GroceryList";
     $scope.groceryItems = GroceryService.groceryItems;
+        $scope.remove = function (item) {
+        GroceryService.remove(item);
+    };
 
 }]);
 
 app.controller("GroceryListItemsController", ["$scope", "$routeParams", "$location", "GroceryService",
     function ($scope, $routeParams, $location, GroceryService) {
 
-    $scope.groceryItems = {id:0, completed:false, itemName:"", date: Date()};
+    $scope.groceryItems = {id:0, completed:true, itemName:"Cheese", date: Date()};
     
     $scope.save = function () {
-
-        GroceryService.save($scope.groceryItems)
+        GroceryService.save($scope.groceryItems);
+        $location.path("/");
     };
-
-    $location.path("/");
 
 }]);
