@@ -31,12 +31,12 @@ app.service("GroceryService", function () {
 
         {id:1, completed:true, itemName:'milk', date: new Date('October 21, 2014')},
         {id:2, completed:true, itemName:'cookies', date: new Date('September 10, 2017')},
-        {id:3, completed:true, itemName:'pulses', date: new Date('October 1, 2015')},
+        {id:3, completed:false, itemName:'pulses', date: new Date('October 1, 2015')},
         {id:4, completed:true, itemName:'wheat', date: new Date('December 23, 2018')},
         {id:5, completed:true, itemName:'bread', date: new Date('February 02, 2018')},
-        {id:6, completed:true, itemName:'butter', date: new Date('March 09, 2006')},
+        {id:6, completed:false, itemName:'butter', date: new Date('March 09, 2006')},
         {id:7, completed:true, itemName:'cheese', date: new Date('January 21, 2014')},
-        {id:8, completed:true, itemName:'chocobar', date: new Date('June 11, 2018')},
+        {id:8, completed:false, itemName:'chocobar', date: new Date('June 11, 2018')},
         {id:9, completed:true, itemName:'shampoo', date: new Date('August 12, 2018')},
         {id:10, completed:true, itemName:'rice', date: new Date('July 1, 2019')},
     ];
@@ -85,15 +85,26 @@ app.service("GroceryService", function () {
 
     };
 
+    groceryService.markCompleted = function (entry) {
+       entry.completed = !entry.completed;
+
+    };
+
     return groceryService;
 });
 
 app.controller("HomeController", ["$scope", "GroceryService", function ($scope, GroceryService) {
 
     $scope.apptitle = "GroceryList";
+
     $scope.groceryItems = GroceryService.groceryItems;
+
     $scope.remove = function (item) {
         GroceryService.remove(item);
+    };
+
+    $scope.markCompleted = function (item) {
+        GroceryService.markCompleted(item);
     };
 
 }]);
