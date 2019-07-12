@@ -15,7 +15,7 @@ app.config(function($routeProvider){
             templateUrl: "views/addItem.html",
             controller: "GroceryListItemsController"
         })
-        .when("/addItem/:id", {
+        .when("/addItem/edit/:id", {
             templateUrl: "views/addItem.html",
             controller: "GroceryListItemsController"
         })
@@ -29,16 +29,16 @@ app.service("GroceryService", function () {
 
     groceryService.groceryItems = [
 
-        {id:1, completed:true, itemName:'milk', date:'2014-10-21'},
-        {id:2, completed:true, itemName:'cookies', date:'2017-10-01'},
-        {id:3, completed:true, itemName:'pulses', date:'2015-10-21'},
-        {id:4, completed:true, itemName:'wheat', date:'2018-10-23'},
-        {id:5, completed:true, itemName:'bread', date:'2015-02-18'},
-        {id:6, completed:true, itemName:'butter', date:'2013-03-06'},
-        {id:7, completed:true, itemName:'cheese', date:'2017-11-19'},
-        {id:8, completed:true, itemName:'chocobar', date:'2016-06-11'},
-        {id:9, completed:true, itemName:'shampoo', date:'2018-08-12'},
-        {id:10, completed:true, itemName:'rice', date:'2019-07-1'},
+        {id:1, completed:true, itemName:'milk', date: new Date('October 21, 2014')},
+        {id:2, completed:true, itemName:'cookies', date: new Date('September 10, 2017')},
+        {id:3, completed:true, itemName:'pulses', date: new Date('October 1, 2015')},
+        {id:4, completed:true, itemName:'wheat', date: new Date('December 23, 2018')},
+        {id:5, completed:true, itemName:'bread', date: new Date('February 02, 2018')},
+        {id:6, completed:true, itemName:'butter', date: new Date('March 09, 2006')},
+        {id:7, completed:true, itemName:'cheese', date: new Date('January 21, 2014')},
+        {id:8, completed:true, itemName:'chocobar', date: new Date('June 11, 2018')},
+        {id:9, completed:true, itemName:'shampoo', date: new Date('August 12, 2018')},
+        {id:10, completed:true, itemName:'rice', date: new Date('July 1, 2019')},
     ];
 
     groceryService.findById = function (id) {
@@ -79,8 +79,10 @@ app.service("GroceryService", function () {
     };
 
     groceryService.remove = function (entry) {
-
         console.log(entry.itemName);
+        var index = groceryService.groceryItems.indexOf(entry);
+        groceryService.groceryItems.splice(index, 1);
+
     };
 
     return groceryService;
@@ -90,7 +92,7 @@ app.controller("HomeController", ["$scope", "GroceryService", function ($scope, 
 
     $scope.apptitle = "GroceryList";
     $scope.groceryItems = GroceryService.groceryItems;
-        $scope.remove = function (item) {
+    $scope.remove = function (item) {
         GroceryService.remove(item);
     };
 
@@ -103,7 +105,7 @@ app.controller("GroceryListItemsController", ["$scope", "$routeParams", "$locati
         $scope.groceryItem = _.clone(GroceryService.findById(parseInt($routeParams.id)));
      }
      else{
-        $scope.groceryItem = {id:0, completed:true, itemName:"", date:Date()};
+        $scope.groceryItem = {id:0, completed:true, itemName:"", date:new Date()};
 
 
      }
