@@ -1,0 +1,12 @@
+[
+{"id":1, "completed":true, "itemName":"milk", "date": "October 21, 2014"},
+{"id":2, "completed":true, "itemName":"cookies", "date": "September 10, 2017"},
+{"id":3, "completed":false, "itemName":"pulses", "date": "October 1, 2015"},
+{"id":4, "completed":true, "itemName":"wheat", "date": "December 23, 2018"},
+{"id":5, "completed":true, "itemName":"bread", "date": "February 02, 2018"},
+{"id":6, "completed":false, "itemName":"butter", "date": "March 09, 2006"},
+{"id":7, "completed":true, "itemName":"cheese", "date": "January 21, 2014"},
+{"id":8, "completed":false, "itemName":"chocobar", "date": "June 11, 2018"},
+{"id":9, "completed":true, "itemName":"shampoo", "date": "August 12, 2018"},
+{"id":10, "completed":true, "itemName":"rice", "date": "July 1, 2019"}
+]

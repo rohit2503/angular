@@ -23,29 +23,29 @@ app.config(function($routeProvider){
 });
 
 
-app.service("GroceryService", function () {
+app.service("GroceryService", function ($http) {
 
     var groceryService = {};
 
-    groceryService.groceryItems = [
+    groceryService.groceryItems = [];
 
-        {id:1, completed:true, itemName:'milk', date: new Date('October 21, 2014')},
-        {id:2, completed:true, itemName:'cookies', date: new Date('September 10, 2017')},
-        {id:3, completed:false, itemName:'pulses', date: new Date('October 1, 2015')},
-        {id:4, completed:true, itemName:'wheat', date: new Date('December 23, 2018')},
-        {id:5, completed:true, itemName:'bread', date: new Date('February 02, 2018')},
-        {id:6, completed:false, itemName:'butter', date: new Date('March 09, 2006')},
-        {id:7, completed:true, itemName:'cheese', date: new Date('January 21, 2014')},
-        {id:8, completed:false, itemName:'chocobar', date: new Date('June 11, 2018')},
-        {id:9, completed:true, itemName:'shampoo', date: new Date('August 12, 2018')},
-        {id:10, completed:true, itemName:'rice', date: new Date('July 1, 2019')},
-    ];
+    $http.get("data/grocery_data.json").then(function success(response){
+
+         groceryService.groceryItems = response.data;
+
+         for(var item in groceryService.groceryItems){
+                groceryService.groceryItems[item].date = new Date(groceryService.groceryItems[item].date);
+          }
+
+    }, function error(response){
+
+    });
 
     groceryService.findById = function (id) {
 
         for (var item in groceryService.groceryItems){
             if(groceryService.groceryItems[item].id == id){
-                return groceryService.groceryItems[item]
+                return groceryService.groceryItems[item];
             }
         }
     };
@@ -79,7 +79,6 @@ app.service("GroceryService", function () {
     };
 
     groceryService.remove = function (entry) {
-        console.log(entry.itemName);
         var index = groceryService.groceryItems.indexOf(entry);
         groceryService.groceryItems.splice(index, 1);
 
@@ -106,6 +105,11 @@ app.controller("HomeController", ["$scope", "GroceryService", function ($scope, 
     $scope.markCompleted = function (item) {
         GroceryService.markCompleted(item);
     };
+
+    $scope.$watch(function() { return GroceryService.groceryItems }, function(groceryItems){
+
+        $scope.groceryItems = groceryItems;
+    });
 
 }]);
 
