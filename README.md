@@ -12,4 +12,4 @@ This short project is all about learning angular basics and implementing the sam
 
 ## Screenshot
 
-![Grocery](grocery/data/grocery.jpg?raw=true "Grocery List")
+![Grocery](https://github.com/rohit2503/angular/blob/master/grocery/data/grocery.png?raw=true "Grocery List")
